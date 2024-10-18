@@ -1,0 +1,21 @@
+<div class="container">
+    <!-- Toggle Button -->
+    <button (click)="toggleVisibility()">
+      {{ isVisible ? 'Hide Animals' : 'Show Animals' }}
+    </button>
+  
+    <!-- Animal List, visible when isVisible is true -->
+    <ul *ngIf="isVisible">
+      <li
+        *ngFor="let animal of animals"
+        [ngClass]="{ 'wild-animal': animal.type === 'wild', 'domestic-animal': animal.type === 'domestic' }"
+        [ngStyle]="{
+          'color': animal.type === 'wild' ? 'red' : 'green',
+          'font-weight': animal.type === 'wild' ? 'bold' : 'normal'
+        }"
+      >
+        {{ animal.name }} :  {{ animal.type }}  ; Age {{ animal.age }}
+      </li>
+    </ul>
+  </div>
+  

@@ -1,0 +1,26 @@
+
+    <h1>Informations Personnelles</h1>
+    <div class="container">
+        <button (click)="toggleVisibility()">
+            {{ isVisible ? 'Hide ' : 'Show ' }}
+          </button>
+        <div class="form-container" *ngIf="isVisible">
+            <h3>Modifier vos informations</h3>
+            <form>
+                <input type="text" id="name" [(ngModel)]="name" name="name" disabled>
+                <input type="email" id="email" [(ngModel)]="email" name="email" disabled>
+                <input type="text" id="address" [(ngModel)]="address" name="address" disabled>
+                <input type="tel" id="phone" [(ngModel)]="phone" name="phone">
+                <input id="birthdate" [(ngModel)]="birthdate" name="birthdate" disabled>
+                <button type="button" (click)="updatePhone()">Update Phone</button>
+            </form>
+        </div>
+        <div class="card">
+            <img [src]="image" alt="Photo de profil">
+            <p>Nom : {{ name }}</p>
+            <p>Email : {{ email }}</p>
+            <p>Adresse : {{ address }}</p>
+            <p>Téléphone : {{ displayedPhone }}</p> <!-- Use displayedPhone here -->
+            <p>Date de naissance : {{ birthdate }}</p>
+        </div>
+    </div>
