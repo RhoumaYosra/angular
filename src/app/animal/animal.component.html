@@ -1,21 +1,18 @@
 <div class="container">
-    <!-- Toggle Button -->
-    <button (click)="toggleVisibility()">
-      {{ isVisible ? 'Hide Animals' : 'Show Animals' }}
-    </button>
-  
-    <!-- Animal List, visible when isVisible is true -->
-    <ul *ngIf="isVisible">
-      <li
-        *ngFor="let animal of animals"
-        [ngClass]="{ 'wild-animal': animal.type === 'wild', 'domestic-animal': animal.type === 'domestic' }"
-        [ngStyle]="{
-          'color': animal.type === 'wild' ? 'red' : 'green',
-          'font-weight': animal.type === 'wild' ? 'bold' : 'normal'
-        }"
-      >
-        {{ animal.name }} :  {{ animal.type }}  ; Age {{ animal.age }}
-      </li>
-    </ul>
+  <!-- Toggle Button -->
+  <button (click)="toggleVisibility()">
+    {{ isVisible ? 'Hide Dogs' : 'Show Dogs' }}
+  </button>
+
+  <!-- Dog List, visible when isVisible is true -->
+  <ul *ngIf="isVisible">
+    <li *ngFor="let dog of dogs">
+      <img [src]="dog" alt="Dog Image" style="width: 200px; height: auto;">
+    </li>
+  </ul>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" style="color: red;">
+    {{ errorMessage }}
   </div>
-  
+</div>

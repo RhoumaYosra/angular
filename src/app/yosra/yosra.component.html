@@ -1,26 +1,57 @@
+<h1>Informations Personnelles</h1>
+<div class="container">
+  <button (click)="toggleVisibility()">
+    {{ isVisible ? 'Hide' : 'Show' }}
+  </button>
+  
+  <div class="form-container" *ngIf="isVisible">
+    <h3>Modifier vos informations</h3>
+    <form [formGroup]="personalInfoForm">
+      <label for="name">Nom</label>
+      <input type="text" id="name" formControlName="name">
+      <div *ngIf="personalInfoForm.get('name')?.hasError('required') && personalInfoForm.get('name')?.touched">
+        Name is required.
+      </div>
 
-    <h1>Informations Personnelles</h1>
-    <div class="container">
-        <button (click)="toggleVisibility()">
-            {{ isVisible ? 'Hide ' : 'Show ' }}
-          </button>
-        <div class="form-container" *ngIf="isVisible">
-            <h3>Modifier vos informations</h3>
-            <form>
-                <input type="text" id="name" [(ngModel)]="name" name="name" disabled>
-                <input type="email" id="email" [(ngModel)]="email" name="email" disabled>
-                <input type="text" id="address" [(ngModel)]="address" name="address" disabled>
-                <input type="tel" id="phone" [(ngModel)]="phone" name="phone">
-                <input id="birthdate" [(ngModel)]="birthdate" name="birthdate" disabled>
-                <button type="button" (click)="updatePhone()">Update Phone</button>
-            </form>
-        </div>
-        <div class="card">
-            <img [src]="image" alt="Photo de profil">
-            <p>Nom : {{ name }}</p>
-            <p>Email : {{ email }}</p>
-            <p>Adresse : {{ address }}</p>
-            <p>Téléphone : {{ displayedPhone }}</p> <!-- Use displayedPhone here -->
-            <p>Date de naissance : {{ birthdate }}</p>
-        </div>
-    </div>
+      <label for="email">Email</label>
+      <input type="email" id="email" formControlName="email">
+      <div *ngIf="personalInfoForm.get('email')?.hasError('required') && personalInfoForm.get('email')?.touched">
+        Email is required.
+      </div>
+      <div *ngIf="personalInfoForm.get('email')?.hasError('email') && personalInfoForm.get('email')?.touched">
+        Please enter a valid email.
+      </div>
+
+      <label for="address">Adresse</label>
+      <input type="text" id="address" formControlName="address">
+      <div *ngIf="personalInfoForm.get('address')?.hasError('required') && personalInfoForm.get('address')?.touched">
+        Address is required.
+      </div>
+
+      <label for="phone">Téléphone</label>
+      <input type="tel" id="phone" formControlName="phone">
+      <div *ngIf="personalInfoForm.get('phone')?.hasError('required') && personalInfoForm.get('phone')?.touched">
+        Phone number is required.
+      </div>
+      <div *ngIf="personalInfoForm.get('phone')?.hasError('pattern') && personalInfoForm.get('phone')?.touched">
+        Phone number must be 8 digits.
+      </div>
+
+      <label for="birthdate">Date de naissance</label>
+      <input id="birthdate" formControlName="birthdate">
+
+      <!-- New button to apply changes -->
+      <button type="button" (click)="applyChanges()" [disabled]="personalInfoForm.invalid">Apply Changes</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <img [src]="image" alt="Photo de profil">
+    <!-- Display updated values from the form after clicking 'Apply Changes' -->
+    <p>Nom : {{ displayedName }}</p>
+    <p>Email : {{ displayedEmail }}</p>
+    <p>Adresse : {{ displayedAddress }}</p>
+    <p>Téléphone : {{ displayedPhone |currency }}</p>
+    <p>Date de naissance : {{ displayedBirthdate | date:'fullDate' }}</p>
+  </div>
+</div>

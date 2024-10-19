@@ -1,35 +1,55 @@
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-yosra',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './yosra.component.html',
-  styleUrls: ['./yosra.component.css']  // corrected to 'styleUrls'
+  styleUrls: ['./yosra.component.css']
 })
-export class YosraComponent {
+export class YosraComponent implements OnInit {
 
-  // Property to toggle visibility
+  // Form group for the reactive form
+  personalInfoForm!: FormGroup;
+
   isVisible: boolean = true;
 
+  // Properties to display in the card (initial values)
+  displayedName: string = "Yosra";
+  displayedEmail: string = "y@gmail.com";
+  displayedAddress: string = "Ibn Khaldoun";
+  displayedPhone: string = "587";
+  displayedBirthdate: Date = new Date('2001-10-28'); // Month is 0-based, so October is 9
 
-  name: string = "Yosra"; // interpolation
-  email: string = "y@gmail.com"; // interpolation
-  address: string = "Ibn Khaldoun"; // interpolation
-  phone: string = "587"; // keep as string for phone number
-  displayedPhone: string = this.phone; // new property for displaying phone
-  birthdate: string = "28/10/2001"; // interpolation
-  image: string = "./yosra.png"; // property binding 
+ 
 
-  // Method to update the displayed phone number
-  updatePhone() {
-    this.displayedPhone = this.phone; // synchronize displayed phone with the input
+  image: string = "./yosra.png"; // property binding
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    // Initialize the form with validation
+    this.personalInfoForm = this.fb.group({
+      name: ['Yosra', Validators.required],
+      email: ['y@gmail.com', [Validators.required, Validators.email]],
+      address: ['Ibn Khaldoun', Validators.required],
+      phone: ['55555555', [Validators.required, Validators.pattern(/^\d{8}$/)]], // 8 digits phone validation
+      birthdate: [{ value: '2001/10/28', disabled: true }] // Birthdate remains disabled
+    });
+  }
+
+  // Method to apply changes to the card when the button is clicked
+  applyChanges() {
+    this.displayedName = this.personalInfoForm.get('name')?.value;
+    this.displayedEmail = this.personalInfoForm.get('email')?.value;
+    this.displayedAddress = this.personalInfoForm.get('address')?.value;
+    this.displayedPhone = this.personalInfoForm.get('phone')?.value;
   }
 
   toggleVisibility() {
     this.isVisible = !this.isVisible;
   }
-
 }
