@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ReverseTextPipe } from '../pipes/reverse-text.pipe';
 
 @Component({
   selector: 'app-yosra',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,ReverseTextPipe],
   templateUrl: './yosra.component.html',
   styleUrls: ['./yosra.component.css']
 })

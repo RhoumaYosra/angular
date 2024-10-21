@@ -49,9 +49,9 @@
     <img [src]="image" alt="Photo de profil">
     <!-- Display updated values from the form after clicking 'Apply Changes' -->
     <p>Nom : {{ displayedName }}</p>
-    <p>Email : {{ displayedEmail }}</p>
+    <p>Email : {{ displayedEmail|reverseText}}</p>
     <p>Adresse : {{ displayedAddress }}</p>
-    <p>Téléphone : {{ displayedPhone |currency }}</p>
+    <p>Téléphone : {{ displayedPhone  }}</p>
     <p>Date de naissance : {{ displayedBirthdate | date:'fullDate' }}</p>
   </div>
 </div>

@@ -1,0 +1,20 @@
+.container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .dog-list {
+    display: flex;
+    flex-wrap: wrap;           /* Wrap images to the next line if there’s no space */
+    justify-content: center;   /* Center the images horizontally */
+    gap: 20px;                 /* Add space between the images */
+    margin-top: 20px;
+  }
+  
+  .dog-list img {
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;        /* Optional: Add some rounded corners to the images */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  /* Optional: Add a shadow */
+  }
+  

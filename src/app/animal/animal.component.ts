@@ -24,17 +24,20 @@ export class AnimalComponent implements OnInit {
 
   ngOnInit() {
     // Get the dogs data from the service on component initialization
-    this.dataService.getDogs().subscribe(
-      (response) => {
+    this.dataService.getDogs().subscribe({
+      next: (response) => {
         if (response.message) {
           this.dogs = response.message; // Assuming the response has a 'message' field with the image URLs
         }
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching dogs:', error);
         this.errorMessage = 'Failed to load dog images. Please try again later.';
+      },
+      complete: () => {
+        console.log('Dog data fetching completed.');
       }
-    );
+    });
   }
 
   // Method to toggle visibility

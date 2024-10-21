@@ -5,11 +5,9 @@
   </button>
 
   <!-- Dog List, visible when isVisible is true -->
-  <ul *ngIf="isVisible">
-    <li *ngFor="let dog of dogs">
-      <img [src]="dog" alt="Dog Image" style="width: 200px; height: auto;">
-    </li>
-  </ul>
+  <div *ngIf="isVisible" class="dog-list">
+    <img *ngFor="let dog of dogs" [src]="dog" alt="Dog Image">
+  </div>
 
   <!-- Error Message -->
   <div *ngIf="errorMessage" style="color: red;">
